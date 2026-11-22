@@ -1,0 +1,43 @@
+import type { Metadata } from "next";
+import InfoPage from "@/components/InfoPage";
+import ContactForm from "@/components/ContactForm";
+import { site } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Contact Us – Report a Bug or Suggest a Tool",
+  description: "Contact the FreeTools Hub team to report a problem, suggest a new tool or ask a question about privacy or advertising.",
+  alternates: { canonical: "/contact/" },
+};
+
+export default function Contact() {
+  return (
+    <InfoPage title="Contact us" href="/contact/" intro="We read every message. Bug reports, incorrect results, accessibility problems and tool ideas are especially welcome.">
+      {site.contactEmail ? (
+        <>
+          <h2>Email</h2>
+          <p>
+            Write to <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>. We aim to reply within a few working days.
+          </p>
+        </>
+      ) : (
+        <p>
+          <em>Contact email not yet configured.</em> (Site owner: set <code>NEXT_PUBLIC_CONTACT_EMAIL</code> before going live — see DEPLOYMENT.md.)
+        </p>
+      )}
+      {site.apiUrl && (
+        <>
+          <h2>Send a message</h2>
+          <ContactForm apiUrl={site.apiUrl} />
+        </>
+      )}
+      <h2>Reporting a problem</h2>
+      <p>To help us fix issues quickly, please include:</p>
+      <ul>
+        <li>The tool's name or page address.</li>
+        <li>What you expected and what happened instead.</li>
+        <li>Your browser and device (for example “Chrome on Android”).</li>
+      </ul>
+      <p>Please do not send us the private files or text you were processing. Describe the problem, or share a non-sensitive sample instead.</p>
+    </InfoPage>
+  );
+}
