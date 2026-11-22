@@ -63,3 +63,13 @@ describe("tool registry & content integrity", () => {
     expect(searchTools("   ")).toHaveLength(0);
   });
 });
+
+import { resolveSiteUrl } from "@/lib/site";
+describe("resolveSiteUrl", () => {
+  it("uses the configured custom domain", () => expect(resolveSiteUrl("https://example.com/")).toBe("https://example.com"));
+  it("falls back to toolsprint.xyz when unset or invalid", () => {
+    expect(resolveSiteUrl(undefined)).toBe("https://toolsprint.xyz");
+    expect(resolveSiteUrl("not a url")).toBe("https://toolsprint.xyz");
+  });
+  it("never uses a vercel.app deployment host", () => expect(resolveSiteUrl("https://freetools-self.vercel.app/")).toBe("https://toolsprint.xyz"));
+});

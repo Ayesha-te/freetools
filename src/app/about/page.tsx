@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/site";
 import Link from "next/link";
 import InfoPage from "@/components/InfoPage";
 import { categories, categoryHref, tools } from "@/lib/tools/registry";
 
-export const metadata: Metadata = {
-  title: "About FreeTools Hub – Free, Private Browser-Based Tools",
-  description: "Why FreeTools Hub exists, how our browser-based tools keep your files private, and our commitment to accurate, genuinely useful free tools.",
-  alternates: { canonical: "/about/" },
-};
+export const metadata: Metadata = pageMeta({
+  title: "About ToolSprint – Free, Private Browser-Based Tools",
+  description: "Why ToolSprint exists, how our browser-based tools keep your files private, and our commitment to accurate, genuinely useful free tools.",
+  path: "/about/", absolute: true,
+});
 
 export default function About() {
   return (
-    <InfoPage title="About FreeTools Hub" href="/about/" intro="FreeTools Hub is a collection of free, practical online tools for everyday tasks — built to be fast, honest about what it can do, and respectful of your privacy.">
+    <InfoPage title="About ToolSprint" href="/about/" intro="ToolSprint is a collection of free, practical online tools for everyday tasks — built to be fast, honest about what it can do, and respectful of your privacy.">
       <h2>Why we built it</h2>
       <p>
         Many “free online tool” websites ask you to upload personal files to unknown servers, hide basic features behind sign-ups, or bury the tool under advertising. We wanted a single place where common tasks — shrinking a photo for an application form, merging PDFs, working out a GPA or checking a JSON file — simply work, without those trade-offs.
@@ -28,7 +29,7 @@ export default function About() {
       <p>Every tool page also explains how the tool works, gives worked examples, lists its limitations and answers common questions, so you understand the result you get.</p>
       <h2>How it works</h2>
       <p>
-        FreeTools Hub is a static website. When you open a tool, the code needed to run it is downloaded to your browser and the processing happens on your own device. Image tools use the browser's Canvas engine, PDF tools use the open-source <a href="https://pdf-lib.js.org/" rel="noopener noreferrer" target="_blank">pdf-lib</a> and <a href="https://mozilla.github.io/pdf.js/" rel="noopener noreferrer" target="_blank">Mozilla PDF.js</a> libraries, and hashes use the Web Crypto API built into your browser.
+        ToolSprint is a static website. When you open a tool, the code needed to run it is downloaded to your browser and the processing happens on your own device. Image tools use the browser's Canvas engine, PDF tools use the open-source <a href="https://pdf-lib.js.org/" rel="noopener noreferrer" target="_blank">pdf-lib</a> and <a href="https://mozilla.github.io/pdf.js/" rel="noopener noreferrer" target="_blank">Mozilla PDF.js</a> libraries, and hashes use the Web Crypto API built into your browser.
       </p>
       <p>This means your photos, documents and text are not uploaded to us. It also means tools keep working quickly even on slower connections once the page has loaded.</p>
       <h2>Our commitments</h2>

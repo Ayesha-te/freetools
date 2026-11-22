@@ -4,12 +4,13 @@ import Script from "next/script";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ads, site } from "@/lib/site";
-import { CONSENT_KEY, getConsent } from "@/lib/analytics";
+import { CONSENT_KEY, CONSENT_RESET_EVENT, getConsent } from "@/lib/analytics";
 
 /**
  * Loads Google Analytics and AdSense only when configured via environment variables.
- * Analytics loads only after the visitor accepts. AdSense (when enabled) requests
- * non-personalised ads until consent is granted. For EEA/UK/CH traffic, Google requires a
+ * Nothing loads before the visitor makes a choice. Analytics loads only after "Accept".
+ * AdSense (when enabled) loads after a choice: personalised after "Accept",
+ * non-personalised after "Reject non-essential". For EEA/UK/CH traffic, Google requires a
  * certified consent management platform — see ADSENSE-CHECKLIST.md.
  */
 export default function Scripts() {
@@ -18,6 +19,9 @@ export default function Scripts() {
 
   useEffect(() => {
     setConsent(getConsent());
+    const reopen = () => setConsent(null);
+    window.addEventListener(CONSENT_RESET_EVENT, reopen);
+    return () => window.removeEventListener(CONSENT_RESET_EVENT, reopen);
   }, []);
 
   function choose(v: "granted" | "denied") {
@@ -39,7 +43,7 @@ export default function Scripts() {
           </Script>
         </>
       )}
-      {ads.enabled && consent !== "unknown" && (
+      {ads.enabled && (consent === "granted" || consent === "denied") && (
         <>
           {consent !== "granted" && (
             <Script id="ads-npa" strategy="afterInteractive">{`(window.adsbygoogle=window.adsbygoogle||[]).requestNonPersonalizedAds=1;`}</Script>

@@ -1,9 +1,9 @@
-import type { ToolContent } from "./types";
+import type { BaseToolContent } from "./types";
 
 const localImage =
-  "Your image is decoded and re-encoded by your own browser using the HTML Canvas API. The file is never uploaded to FreeTools Hub or any other server, and nothing is kept after you close the tab.";
+  "Your image is decoded and re-encoded by your own browser using the HTML Canvas API. The file is never uploaded to ToolSprint or any other server, and nothing is kept after you close the tab.";
 
-export const imageContent: Record<string, ToolContent> = {
+export const imageContent: Record<string, BaseToolContent> = {
   "image-compressor": {
     intro: [
       "The Image Compressor makes JPG, PNG and WebP files smaller by re-encoding them at a quality level you choose. You can also cap the longest side of the image, which is often the single biggest saving for photos taken on modern phones.",

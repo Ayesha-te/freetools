@@ -1,5 +1,17 @@
 /** Additional, tool-specific FAQ entries appended to the main content. */
 export const extraFaq: Record<string, { q: string; a: string }[]> = {
+  "discount-calculator": [
+    { q: "Is a 20% discount followed by another 10% the same as 30% off?", a: "No. The second discount applies to the already reduced price, so 20% then 10% equals 28% off in total. The calculator shows this effective discount so you can compare offers fairly." },
+  ],
+  "shipping-cost-calculator": [
+    { q: "Why is my chargeable weight higher than the parcel's real weight?", a: "Carriers charge for whichever is greater: the actual weight or the volumetric weight. A large, light box takes up space in the vehicle, so its volumetric weight is used. Reducing box size is often the easiest way to cut the cost." },
+  ],
+  "vat-calculator": [
+    { q: "Why can't I just subtract the VAT rate from a gross price?", a: "Because VAT is calculated on the net price, not the gross price. With 20% VAT, a 120 price contains 20 of VAT (120 ÷ 1.2 = 100 net), not 24. The Remove VAT mode uses the correct formula: net = gross ÷ (1 + rate)." },
+  ],
+  "regex-tester": [
+    { q: "Which regex flavour does this tester use?", a: "JavaScript (ECMAScript), exactly as implemented by your current browser. Patterns that work here will behave the same in JavaScript and TypeScript code, but may need small changes for Python, PHP (PCRE) or .NET." },
+  ],
   "slug-generator": [
     { q: "How long should a URL slug be?", a: "Short enough to read at a glance — typically three to six meaningful words. Long slugs are not penalised directly, but they are harder to share and are often truncated in search results and messages." },
     { q: "Should I include dates or numbers in slugs?", a: "Avoid dates for content you plan to update, because the URL would look outdated. Numbers are fine when they are part of the meaning, such as a list of 10 tips, but remember to update the slug or redirect if the number changes." },
@@ -43,6 +55,7 @@ export const extraFaq: Record<string, { q: string; a: string }[]> = {
     { q: "Is my text compared on a server?", a: "No. The comparison algorithm runs in your browser, so confidential contracts and code never leave your device." },
   ],
   "html-entity-encoder-decoder": [
+    { q: "Which characters must be escaped in HTML?", a: "Inside normal text, always escape < and & (as &lt; and &amp;). Inside attribute values, also escape the quote character that wraps the value (&quot; or &#39;). Other characters, including accented letters and emoji, can be written directly when the page uses UTF-8." },
     { q: "What is the difference between &#39; and &apos;?", a: "Both represent an apostrophe. &apos; is valid in HTML5 and XML but was not defined in HTML4, so &#39; is the most compatible choice." },
   ],
   "json-validator": [

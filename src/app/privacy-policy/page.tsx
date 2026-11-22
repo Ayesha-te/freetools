@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import InfoPage from "@/components/InfoPage";
-import { ads, site } from "@/lib/site";
+import { ads, site, pageMeta } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Privacy Policy",
-  description: "How FreeTools Hub handles your data: local file processing, browser storage, optional analytics, advertising cookies and your choices.",
-  alternates: { canonical: "/privacy-policy/" },
-};
+  description: "How ToolSprint handles your data: local file processing, browser storage, optional analytics, advertising cookies and your choices.",
+  path: "/privacy-policy/",
+});
 
 export default function Privacy() {
   const analytics = !!site.gaId;
   return (
-    <InfoPage title="Privacy Policy" href="/privacy-policy/" updated={site.lastUpdated} intro="This policy explains what information is and is not collected when you use FreeTools Hub, and the choices you have.">
+    <InfoPage title="Privacy Policy" href="/privacy-policy/" updated={site.lastUpdated} intro="This policy explains what information is and is not collected when you use ToolSprint, and the choices you have.">
       <h2>1. Files and text you process</h2>
       <p>
         Our image, PDF, text, developer and calculator tools run inside your web browser. When you select a file or type text, it is processed on your own device. <strong>We do not upload, store or view your files, the text you enter, or the results produced.</strong> That data is discarded when you close or reload the page.
@@ -58,7 +58,7 @@ export default function Privacy() {
       )}
       <h2>6. Cookies and consent</h2>
       <p>
-        FreeTools Hub itself does not set tracking cookies. Third-party cookies are only used by analytics or advertising services when these are enabled, and you are asked for consent first. You can change your choice at any time by clearing this site's data in your browser, which will show the consent banner again.
+        ToolSprint itself does not set tracking cookies. Third-party cookies are only used by analytics or advertising services when these are enabled, and you are asked for consent first. You can change your choice at any time with the “Cookie settings” link in the footer (shown when these services are enabled), or by clearing this site’s data in your browser.
       </p>
       <h2>7. Children</h2>
       <p>Our tools are suitable for general audiences, including students. We do not knowingly collect personal information from children.</p>

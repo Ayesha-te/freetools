@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, X, Moon, Sun, Wrench } from "lucide-react";
+import { Menu, X, Moon, Sun, Zap } from "lucide-react";
 import SearchBox from "./SearchBox";
 import { categories, categoryHref } from "@/lib/tools/registry";
 import ToolIcon from "@/components/ToolIcon";
@@ -35,12 +35,12 @@ function ThemeToggle() {
 
 export function Logo() {
   return (
-    <Link href="/" className="flex shrink-0 items-center gap-2 font-bold text-ink" aria-label="FreeTools Hub home">
+    <Link href="/" className="flex shrink-0 items-center gap-2 font-bold text-ink" aria-label="ToolSprint home">
       <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
-        <Wrench className="h-4 w-4" aria-hidden />
+        <Zap className="h-4 w-4" aria-hidden />
       </span>
       <span className="text-lg tracking-tight">
-        FreeTools<span className="text-primary">Hub</span>
+        Tool<span className="text-primary">Sprint</span>
       </span>
     </Link>
   );

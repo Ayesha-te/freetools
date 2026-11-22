@@ -35,7 +35,7 @@ export const categories: Category[] = [
     icon: "Image",
     intro: [
       "Image files are often too large for upload forms, email attachments or web pages. These tools help you shrink, reshape and convert pictures without installing software.",
-      "Every image tool on FreeTools Hub uses your browser's built-in Canvas engine. Files are decoded and re-encoded on your own device, which is faster than uploading and keeps private photos such as ID scans and documents off our servers.",
+      "Every image tool on ToolSprint uses your browser's built-in Canvas engine. Files are decoded and re-encoded on your own device, which is faster than uploading and keeps private photos such as ID scans and documents off our servers.",
       "Start with the Image Compressor if you simply want a smaller file, use the 50KB or 100KB tools when a form enforces a strict limit, and use the Resizer or Cropper when the pixel dimensions themselves need to change.",
     ],
   },

@@ -1,9 +1,9 @@
-import type { ToolContent } from "./types";
+import type { BaseToolContent } from "./types";
 
 const localText =
-  "Your text stays in your browser. It is not uploaded, saved or analysed by FreeTools Hub, and it disappears when you close or reload the page.";
+  "Your text stays in your browser. It is not uploaded, saved or analysed by ToolSprint, and it disappears when you close or reload the page.";
 
-export const textContent: Record<string, ToolContent> = {
+export const textContent: Record<string, BaseToolContent> = {
   "word-counter": {
     intro: [
       "The Word Counter counts words, characters, sentences and paragraphs as you type, and estimates reading and speaking time. A side panel lists your most frequently used words so you can spot repetition.",

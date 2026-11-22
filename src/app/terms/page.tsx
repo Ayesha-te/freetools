@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import InfoPage from "@/components/InfoPage";
-import { site } from "@/lib/site";
+import { site, pageMeta } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Terms of Service",
-  description: "The terms for using FreeTools Hub: acceptable use, your responsibilities, intellectual property, availability and limitation of liability.",
-  alternates: { canonical: "/terms/" },
-};
+  description: "The terms for using ToolSprint: acceptable use, your responsibilities, intellectual property, availability and limitation of liability.",
+  path: "/terms/",
+});
 
 export default function Terms() {
   return (
-    <InfoPage title="Terms of Service" href="/terms/" updated={site.lastUpdated} intro="By using FreeTools Hub you agree to these terms. Please read them carefully.">
+    <InfoPage title="Terms of Service" href="/terms/" updated={site.lastUpdated} intro="By using ToolSprint you agree to these terms. Please read them carefully.">
       <h2>1. The service</h2>
-      <p>FreeTools Hub provides free, browser-based tools for working with images, PDFs, text and code, and calculators for study and business. Most processing takes place on your own device.</p>
+      <p>ToolSprint provides free, browser-based tools for working with images, PDFs, text and code, and calculators for study and business. Most processing takes place on your own device.</p>
       <h2>2. Acceptable use</h2>
       <p>You agree not to:</p>
       <ul>
@@ -32,12 +32,12 @@ export default function Terms() {
       <p>The service is provided free of charge “as is” and “as available”. We may change, suspend or discontinue any tool at any time without notice, and we do not guarantee uninterrupted or error-free operation.</p>
       <h2>6. Limitation of liability</h2>
       <p>
-        To the maximum extent permitted by law, FreeTools Hub and its operators are not liable for any indirect, incidental or consequential loss, including loss of data, revenue or opportunity, arising from your use of the tools or reliance on their results. Nothing in these terms excludes liability that cannot be excluded by law.
+        To the maximum extent permitted by law, ToolSprint and its operators are not liable for any indirect, incidental or consequential loss, including loss of data, revenue or opportunity, arising from your use of the tools or reliance on their results. Nothing in these terms excludes liability that cannot be excluded by law.
       </p>
       <h2>7. Third-party services and links</h2>
       <p>The site may contain links to other websites and, where enabled, advertising and analytics provided by third parties. Their own terms and privacy policies apply, and we are not responsible for their content.</p>
       <h2>8. Intellectual property</h2>
-      <p>The website design, text and original code are owned by the operators of FreeTools Hub. Open-source libraries we use are subject to their own licences.</p>
+      <p>The website design, text and original code are owned by the operators of ToolSprint. Open-source libraries we use are subject to their own licences.</p>
       <h2>9. Changes to these terms</h2>
       <p>We may update these terms. Continued use of the site after changes take effect means you accept the revised terms.</p>
       <h2>10. Contact</h2>

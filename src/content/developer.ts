@@ -1,9 +1,9 @@
-import type { ToolContent } from "./types";
+import type { BaseToolContent } from "./types";
 
 const localDev =
   "Everything is processed by JavaScript running in your browser tab. Your input is not sent to a server, logged or stored, so it is safe to use with configuration files and internal data. As always, avoid pasting production secrets into any website you do not control.";
 
-export const developerContent: Record<string, ToolContent> = {
+export const developerContent: Record<string, BaseToolContent> = {
   "json-formatter": {
     intro: [
       "The JSON Formatter pretty-prints JSON with consistent indentation so nested objects and arrays become readable. It can also sort keys alphabetically or minify JSON into a single compact line.",

@@ -1,9 +1,9 @@
-import type { ToolContent } from "./types";
+import type { BaseToolContent } from "./types";
 
 const localBiz =
   "The figures you enter are processed only in your browser and are not transmitted or stored. This makes the calculator safe for confidential pricing and cost information.";
 
-export const businessContent: Record<string, ToolContent> = {
+export const businessContent: Record<string, BaseToolContent> = {
   "profit-margin-calculator": {
     intro: [
       "The Profit Margin Calculator shows gross profit, profit margin and markup from your cost and selling price. Add the number of units to see total revenue and profit.",

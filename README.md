@@ -1,4 +1,4 @@
-# FreeTools Hub — Frontend
+# ToolSprint — Frontend
 
 Next.js 15 (App Router) + TypeScript + Tailwind CSS 4, exported as a fully static site (`out/`).
 

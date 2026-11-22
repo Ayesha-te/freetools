@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import InfoPage from "@/components/InfoPage";
 import ContactForm from "@/components/ContactForm";
-import { site } from "@/lib/site";
+import { site, pageMeta } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Contact Us – Report a Bug or Suggest a Tool",
-  description: "Contact the FreeTools Hub team to report a problem, suggest a new tool or ask a question about privacy or advertising.",
-  alternates: { canonical: "/contact/" },
-};
+  description: "Contact the ToolSprint team to report a problem, suggest a new tool or ask a question about privacy or advertising.",
+  path: "/contact/",
+});
 
 export default function Contact() {
   return (

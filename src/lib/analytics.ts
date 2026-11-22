@@ -13,6 +13,8 @@ declare global {
 }
 
 export const CONSENT_KEY = "fth-consent";
+/** Window event that re-opens the cookie banner so visitors can change their choice. */
+export const CONSENT_RESET_EVENT = "toolsprint:consent-reset";
 
 export function getConsent(): "granted" | "denied" | null {
   try {

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import InfoPage from "@/components/InfoPage";
-import { site } from "@/lib/site";
+import { site, pageMeta } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Disclaimer",
-  description: "Limitations of FreeTools Hub calculators, file conversions and generated output, and why you should verify important results.",
-  alternates: { canonical: "/disclaimer/" },
-};
+  description: "Limitations of ToolSprint calculators, file conversions and generated output, and why you should verify important results.",
+  path: "/disclaimer/",
+});
 
 export default function Disclaimer() {
   return (

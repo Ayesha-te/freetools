@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { categories, categoryHref, tools, toolHref } from "@/lib/tools/registry";
 import { site } from "@/lib/site";
+import CookieSettingsButton from "@/components/layout/CookieSettingsButton";
 
 export default function Footer() {
   const popular = tools.filter((t) => t.popular).slice(0, 6);
@@ -9,7 +10,7 @@ export default function Footer() {
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:grid-cols-2 sm:px-6 lg:grid-cols-4">
         <div>
           <p className="text-lg font-bold text-ink">
-            FreeTools<span className="text-primary">Hub</span>
+            Tool<span className="text-primary">Sprint</span>
           </p>
           <p className="mt-2 text-sm text-muted">{site.tagline}</p>
           <p className="mt-3 text-sm text-muted">Free browser-based tools. Most processing happens on your own device.</p>
@@ -55,6 +56,7 @@ export default function Footer() {
                 </Link>
               </li>
             ))}
+            <CookieSettingsButton />
           </ul>
         </nav>
       </div>

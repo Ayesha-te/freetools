@@ -7,7 +7,7 @@ import ToolCard from "@/components/ToolCard";
 import ToolIcon from "@/components/ToolIcon";
 import AdSlot from "@/components/AdSlot";
 import JsonLd from "@/components/JsonLd";
-import { ogImages, absUrl } from "@/lib/site";
+import { absUrl, pageMeta } from "@/lib/site";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -18,13 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const c = categoryMap[slug];
   if (!c) return {};
-  return {
-    title: c.title,
-    description: c.metaDescription,
-    alternates: { canonical: categoryHref(slug) },
-    openGraph: { title: c.title, description: c.metaDescription, url: categoryHref(slug) , images: ogImages },
-    twitter: { title: c.title, description: c.metaDescription },
-  };
+  return pageMeta({ title: c.title, description: c.metaDescription, path: categoryHref(slug) });
 }
 
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {

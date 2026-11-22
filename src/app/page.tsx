@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ShieldCheck, Zap, Gift, ArrowRight } from "lucide-react";
 import { categories, categoryHref, tools, toolsInCategory } from "@/lib/tools/registry";
-import { site, absUrl } from "@/lib/site";
+import { site, absUrl, pageMeta } from "@/lib/site";
 import SearchBox from "@/components/layout/SearchBox";
 import ToolCard from "@/components/ToolCard";
 import ToolIcon from "@/components/ToolIcon";
@@ -10,9 +10,12 @@ import PersonalTools from "@/components/PersonalTools";
 import AdSlot from "@/components/AdSlot";
 import JsonLd from "@/components/JsonLd";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/" },
-};
+export const metadata: Metadata = pageMeta({
+  title: `${site.name} – Free Online Tools for Images, PDFs, Students & Developers`,
+  description: site.description,
+  path: "/",
+  absolute: true,
+});
 
 export default function Home() {
   const popular = tools.filter((t) => t.popular);
@@ -108,9 +111,24 @@ export default function Home() {
         data={{
           "@context": "https://schema.org",
           "@type": "WebSite",
+          "@id": absUrl("/") + "#website",
           name: site.name,
           url: absUrl("/"),
           description: site.description,
+          inLanguage: "en",
+          publisher: { "@id": absUrl("/") + "#organization" },
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": absUrl("/") + "#organization",
+          name: site.name,
+          url: absUrl("/"),
+          logo: `${site.url}/logo.png`,
+          slogan: site.tagline,
+          ...(site.contactEmail ? { email: site.contactEmail } : {}),
         }}
       />
     </>

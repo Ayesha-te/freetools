@@ -15,4 +15,9 @@ export interface ToolContent {
   privacy: string;
   faq: { q: string; a: string }[];
   related: string[];
+  /** Who benefits from the tool. */
+  audience: string[];
+  /** Key features actually implemented. */
+  features: string[];
 }
+export type BaseToolContent = Omit<ToolContent, "audience" | "features">;

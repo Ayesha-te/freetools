@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ShieldCheck } from "lucide-react";
 import { tools, toolMap, categoryMap, toolHref, categoryHref } from "@/lib/tools/registry";
 import { content } from "@/content";
-import { ogImages, absUrl, site } from "@/lib/site";
+import { absUrl, site, pageMeta } from "@/lib/site";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import ToolRenderer from "@/components/tools/ToolRenderer";
 import ToolCard from "@/components/ToolCard";
@@ -23,14 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const t = toolMap[slug];
   if (!t) return {};
-  const url = toolHref(slug);
-  return {
-    title: t.title,
-    description: t.metaDescription,
-    alternates: { canonical: url },
-    openGraph: { title: t.title, description: t.metaDescription, url, type: "website" , images: ogImages },
-    twitter: { title: t.title, description: t.metaDescription, card: "summary_large_image" },
-  };
+  return pageMeta({ title: t.title, description: t.metaDescription, path: toolHref(slug) });
 }
 
 export default async function ToolPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -74,6 +67,28 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
         {c.intro.map((p, i) => (
           <p key={i}>{p}</p>
         ))}
+
+        {c.audience.length > 0 && (
+          <>
+            <h2>Who is the {tool.name} for?</h2>
+            <ul>
+              {c.audience.map((a, i) => (
+                <li key={i}>{a}</li>
+              ))}
+            </ul>
+          </>
+        )}
+
+        {c.features.length > 0 && (
+          <>
+            <h2>Key features</h2>
+            <ul>
+              {c.features.map((f, i) => (
+                <li key={i}>{f}</li>
+              ))}
+            </ul>
+          </>
+        )}
 
         <h2>Why use it?</h2>
         {c.why.map((p, i) => (

@@ -34,8 +34,8 @@ export default function PdfCompressor({ slug }: ToolProps) {
       if (mode === "lossless") {
         const d = await openPdf(file);
         // remove metadata bloat and re-save with compressed object streams
-        d.setProducer("FreeTools Hub");
-        d.setCreator("FreeTools Hub");
+        d.setProducer("ToolSprint");
+        d.setCreator("ToolSprint");
         setProgress(0.5);
         setResult(await savePdf(d));
       } else {

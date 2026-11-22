@@ -1,9 +1,9 @@
-import type { ToolContent } from "./types";
+import type { BaseToolContent } from "./types";
 
 const localPdf =
-  "Your PDF is opened and processed inside your browser with the open-source pdf-lib and PDF.js libraries. It is never uploaded to FreeTools Hub or any third party, which makes the tool suitable for confidential documents.";
+  "Your PDF is opened and processed inside your browser with the open-source pdf-lib and PDF.js libraries. It is never uploaded to ToolSprint or any third party, which makes the tool suitable for confidential documents.";
 
-export const pdfContent: Record<string, ToolContent> = {
+export const pdfContent: Record<string, BaseToolContent> = {
   "pdf-merger": {
     intro: [
       "PDF Merger combines two or more PDF files into a single document. You control the order of the files, and every page is copied with its original text, fonts and images intact.",

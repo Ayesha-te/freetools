@@ -1,9 +1,9 @@
-import type { ToolContent } from "./types";
+import type { BaseToolContent } from "./types";
 
 const localCalc =
   "All calculations run in your browser. The grades, marks and names you enter are not sent to any server or stored after you leave the page.";
 
-export const studentContent: Record<string, ToolContent> = {
+export const studentContent: Record<string, BaseToolContent> = {
   "gpa-calculator": {
     intro: [
       "The GPA Calculator works out a credit-weighted grade point average for one semester or term. Enter each course's letter grade and credit hours and the result updates instantly.",

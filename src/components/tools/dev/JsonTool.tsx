@@ -6,7 +6,7 @@ import { jsonHint, jsonStats, parseJson, sortKeysDeep } from "@/lib/calc/dev";
 import { track } from "@/lib/analytics";
 import type { ToolProps } from "../ToolRenderer";
 
-const SAMPLE = `{"name":"FreeTools Hub","version":2,"tags":["json","formatter"],"settings":{"indent":2,"sortKeys":false},"active":true,"owner":null}`;
+const SAMPLE = `{"name":"ToolSprint","version":2,"tags":["json","formatter"],"settings":{"indent":2,"sortKeys":false},"active":true,"owner":null}`;
 const MAX = 10 * 1024 * 1024;
 
 export default function JsonTool({ slug }: ToolProps) {
