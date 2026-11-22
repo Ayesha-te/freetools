@@ -7,7 +7,7 @@ export default function Breadcrumbs({ items }: { items: { name: string; href: st
   const all = [{ name: "Home", href: "/" }, ...items];
   return (
     <>
-      <nav aria-label="Breadcrumb" className="text-sm text-muted">
+      <nav aria-label="Breadcrumb" className="text-[13px] text-muted">
         <ol className="flex flex-wrap items-center gap-1">
           {all.map((it, i) => (
             <li key={it.href} className="flex items-center gap-1">
@@ -17,7 +17,7 @@ export default function Breadcrumbs({ items }: { items: { name: string; href: st
                   {it.name}
                 </span>
               ) : (
-                <Link href={it.href} className="hover:text-primary">
+                <Link href={it.href} className="transition-colors hover:text-ink">
                   {it.name}
                 </Link>
               )}

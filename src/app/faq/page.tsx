@@ -3,6 +3,7 @@ import { pageMeta } from "@/lib/site";
 import Link from "next/link";
 import InfoPage from "@/components/InfoPage";
 import JsonLd from "@/components/JsonLd";
+import FaqList from "@/components/FaqList";
 
 export const metadata: Metadata = pageMeta({
   title: "Frequently Asked Questions",
@@ -27,17 +28,21 @@ const faqs: { q: string; a: string; link?: [string, string] }[] = [
 export default function Faq() {
   return (
     <InfoPage title="Frequently asked questions" href="/faq/" intro="Quick answers about privacy, limits and how ToolSprint works." ads>
-      <div className="not-prose space-y-3">
-        {faqs.map((f) => (
-          <details key={f.q} className="rounded-lg border border-border bg-surface px-4 py-3">
-            <summary className="cursor-pointer font-medium text-ink">{f.q}</summary>
-            <p className="mt-2 leading-relaxed text-ink-2">
+      <FaqList
+        items={faqs.map((f) => ({
+          q: f.q,
+          a: (
+            <>
               {f.a}{" "}
-              {f.link && <Link href={f.link[1]} className="text-primary underline">{f.link[0]}</Link>}
-            </p>
-          </details>
-        ))}
-      </div>
+              {f.link && (
+                <Link href={f.link[1]} className="font-medium text-primary underline underline-offset-4">
+                  {f.link[0]}
+                </Link>
+              )}
+            </>
+          ),
+        }))}
+      />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />
     </InfoPage>
   );

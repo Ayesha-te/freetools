@@ -11,7 +11,7 @@ export function cx(...c: (string | false | null | undefined)[]) {
 type Variant = "primary" | "secondary" | "ghost" | "danger";
 export function Button({ variant = "primary", className, ...p }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: Variant }) {
   const styles: Record<Variant, string> = {
-    primary: "bg-primary text-white hover:bg-primary-hover border-transparent",
+    primary: "bg-primary text-on-primary hover:bg-primary-hover border-transparent shadow-card",
     secondary: "bg-surface text-ink border-border-strong hover:bg-surface-2",
     ghost: "bg-transparent text-ink-2 border-transparent hover:bg-surface-2",
     danger: "bg-surface text-danger border-border-strong hover:bg-danger-soft",
@@ -21,7 +21,7 @@ export function Button({ variant = "primary", className, ...p }: ButtonHTMLAttri
       type="button"
       {...p}
       className={cx(
-        "inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50",
+        "inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border px-4 py-2 text-sm font-semibold transition-colors active:translate-y-px disabled:cursor-not-allowed disabled:opacity-50 disabled:active:translate-y-0",
         styles[variant],
         className,
       )}
@@ -42,7 +42,7 @@ export function Field({ label, hint, children, htmlFor, className }: { label: st
 }
 
 const inputCls =
-  "w-full min-w-0 rounded-lg border border-border-strong bg-surface px-3 py-2 text-sm text-ink placeholder:text-muted focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/25";
+  "w-full min-w-0 rounded-xl border border-border-strong bg-surface px-3.5 py-2 text-sm text-ink transition-[border-color,box-shadow] placeholder:text-muted hover:border-ink/30 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/15";
 
 export function Input({ label, hint, className, id, ...p }: InputHTMLAttributes<HTMLInputElement> & { label?: string; hint?: ReactNode }) {
   const auto = useId();
@@ -66,7 +66,7 @@ export function NumberField({
   return (
     <Field label={label} hint={hint} htmlFor={id} className={className}>
       <div className="flex items-stretch">
-        {prefix && <span className="inline-flex items-center rounded-l-lg border border-r-0 border-border-strong bg-surface-2 px-3 text-sm text-muted">{prefix}</span>}
+        {prefix && <span className="inline-flex items-center rounded-l-xl border border-r-0 border-border-strong bg-surface-2 px-3 text-sm text-muted">{prefix}</span>}
         <input
           id={id}
           type="number"
@@ -79,7 +79,7 @@ export function NumberField({
           onChange={(e) => onChange(e.target.value)}
           className={cx(inputCls, "min-h-10", prefix && "rounded-l-none", suffix && "rounded-r-none")}
         />
-        {suffix && <span className="inline-flex items-center rounded-r-lg border border-l-0 border-border-strong bg-surface-2 px-3 text-sm text-muted">{suffix}</span>}
+        {suffix && <span className="inline-flex items-center rounded-r-xl border border-l-0 border-border-strong bg-surface-2 px-3 text-sm text-muted">{suffix}</span>}
       </div>
     </Field>
   );
@@ -130,7 +130,7 @@ export function Checkbox({ label, checked, onChange, hint }: { label: string; ch
 
 export function Segmented<T extends string>({ label, value, onChange, options }: { label: string; value: T; onChange: (v: T) => void; options: { value: T; label: string }[] }) {
   return (
-    <div role="radiogroup" aria-label={label} className="inline-flex max-w-full flex-wrap gap-1 rounded-lg border border-border bg-surface-2 p-1">
+    <div role="radiogroup" aria-label={label} className="inline-flex max-w-full flex-wrap gap-1 rounded-xl border border-border bg-surface-2 p-1">
       {options.map((o) => (
         <button
           key={o.value}
@@ -139,8 +139,8 @@ export function Segmented<T extends string>({ label, value, onChange, options }:
           aria-checked={value === o.value}
           onClick={() => onChange(o.value)}
           className={cx(
-            "min-h-9 rounded-md px-3 text-sm font-medium transition-colors",
-            value === o.value ? "bg-surface text-primary shadow-sm" : "text-ink-2 hover:text-ink",
+            "min-h-9 rounded-lg px-3 text-sm font-medium transition-colors",
+            value === o.value ? "bg-surface text-ink shadow-card ring-1 ring-border" : "text-ink-2 hover:text-ink",
           )}
         >
           {o.label}
@@ -158,7 +158,7 @@ export function Alert({ kind = "info", children, title }: { kind?: "info" | "err
     warn: { cls: "border-warn/40 bg-warn-soft text-warn", Icon: AlertCircle },
   }[kind];
   return (
-    <div role={kind === "error" ? "alert" : "status"} className={cx("flex gap-3 rounded-lg border px-4 py-3 text-sm", map.cls)}>
+    <div role={kind === "error" ? "alert" : "status"} className={cx("flex gap-3 rounded-xl border px-4 py-3 text-sm", map.cls)}>
       <map.Icon className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
       <div className="min-w-0 break-words">
         {title && <p className="font-semibold">{title}</p>}
@@ -223,8 +223,8 @@ export function ResetButton({ onClick }: { onClick: () => void }) {
 
 export function Panel({ children, className, title }: { children: ReactNode; className?: string; title?: string }) {
   return (
-    <section className={cx("rounded-xl border border-border bg-surface p-4 sm:p-5", className)} aria-label={title}>
-      {title && <h2 className="mb-3 text-base font-semibold text-ink">{title}</h2>}
+    <section className={cx("rounded-2xl border border-border bg-surface p-4 shadow-card sm:p-6", className)} aria-label={title}>
+      {title && <h2 className="mb-4 font-sans text-base font-semibold tracking-normal text-ink">{title}</h2>}
       {children}
     </section>
   );
@@ -232,9 +232,9 @@ export function Panel({ children, className, title }: { children: ReactNode; cla
 
 export function Stat({ label, value, sub, highlight }: { label: string; value: ReactNode; sub?: ReactNode; highlight?: boolean }) {
   return (
-    <div className={cx("min-w-0 rounded-lg border px-4 py-3", highlight ? "border-primary/40 bg-primary-soft" : "border-border bg-surface-2")}>
-      <p className="text-xs font-medium uppercase tracking-wide text-muted">{label}</p>
-      <p className={cx("mt-1 break-words text-xl font-bold tabular-nums", highlight ? "text-primary-ink" : "text-ink")}>{value}</p>
+    <div className={cx("min-w-0 rounded-xl border px-4 py-3", highlight ? "border-primary/30 bg-primary-soft" : "border-border bg-surface-2")}>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">{label}</p>
+      <p className={cx("mt-1 break-words font-mono text-xl font-semibold tabular-nums tracking-tight", highlight ? "text-primary-ink" : "text-ink")}>{value}</p>
       {sub && <p className="mt-0.5 text-xs text-muted">{sub}</p>}
     </div>
   );
@@ -242,8 +242,11 @@ export function Stat({ label, value, sub, highlight }: { label: string; value: R
 
 export function Explain({ children }: { children: ReactNode }) {
   return (
-    <details className="rounded-lg border border-border bg-surface-2 px-4 py-3 text-sm text-ink-2">
-      <summary className="cursor-pointer font-medium text-ink">How this was calculated</summary>
+    <details className="group rounded-xl border border-border bg-surface-2 px-4 py-3 text-sm text-ink-2">
+      <summary className="flex cursor-pointer items-center justify-between gap-2 font-medium text-ink">
+        How this was calculated
+        <span className="text-muted transition-transform group-open:rotate-45" aria-hidden>+</span>
+      </summary>
       <div className="mt-2 space-y-1 leading-relaxed">{children}</div>
     </details>
   );

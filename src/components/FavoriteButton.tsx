@@ -15,8 +15,8 @@ export default function FavoriteButton({ slug, name, small = false }: { slug: st
       aria-label={fav ? `Remove ${name} from favorites` : `Add ${name} to favorites`}
       title={fav ? "Remove from favorites" : "Add to favorites"}
       className={cx(
-        "inline-flex items-center justify-center gap-1.5 rounded-lg text-sm font-medium transition-colors",
-        small ? "h-9 w-9 text-muted hover:bg-surface-2" : "min-h-10 border border-border-strong px-3 text-ink-2 hover:bg-surface-2",
+        "inline-flex items-center justify-center gap-1.5 rounded-full text-sm font-medium transition-colors",
+        small ? "h-9 w-9 text-muted hover:bg-surface-2 hover:text-ink" : "min-h-10 border border-border-strong bg-surface px-4 text-ink-2 hover:bg-surface-2",
         fav && "text-amber-500",
       )}
     >

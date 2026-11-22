@@ -56,7 +56,7 @@ export default function Scripts() {
         </>
       )}
       {consent === null && (
-        <div role="dialog" aria-label="Cookie preferences" className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-2xl rounded-xl border border-border bg-surface p-4 shadow-lg sm:inset-x-6">
+        <div role="dialog" aria-label="Cookie preferences" className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-2xl rounded-2xl border border-border bg-surface p-4 shadow-pop sm:inset-x-6 sm:p-5">
           <p className="text-sm text-ink-2">
             We use cookies for {site.gaId ? "anonymous usage statistics" : ""}
             {site.gaId && ads.enabled ? " and " : ""}
@@ -67,10 +67,10 @@ export default function Scripts() {
             .
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
-            <button onClick={() => choose("granted")} className="min-h-10 rounded-lg bg-primary px-4 text-sm font-medium text-white hover:bg-primary-hover">
+            <button onClick={() => choose("granted")} className="min-h-10 rounded-full bg-ink px-5 text-sm font-semibold text-bg hover:opacity-90">
               Accept
             </button>
-            <button onClick={() => choose("denied")} className="min-h-10 rounded-lg border border-border-strong px-4 text-sm font-medium text-ink hover:bg-surface-2">
+            <button onClick={() => choose("denied")} className="min-h-10 rounded-full border border-border-strong px-5 text-sm font-medium text-ink hover:bg-surface-2">
               Reject non-essential
             </button>
           </div>

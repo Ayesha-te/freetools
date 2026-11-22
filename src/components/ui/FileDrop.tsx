@@ -42,15 +42,17 @@ export default function FileDrop({
         handle(e.dataTransfer.files);
       }}
       className={cx(
-        "flex flex-col items-center justify-center rounded-xl border-2 border-dashed text-center transition-colors",
-        compact ? "gap-1 px-4 py-5" : "gap-2 px-6 py-10",
-        over ? "border-primary bg-primary-soft" : "border-border-strong bg-surface-2/60 hover:border-primary/60",
+        "flex flex-col items-center justify-center rounded-2xl border-2 border-dashed text-center transition-colors",
+        compact ? "gap-1.5 px-4 py-5" : "gap-3 px-6 py-12",
+        over ? "border-primary bg-primary-soft" : "border-border-strong bg-surface hover:border-primary/60 hover:bg-primary-soft/40",
       )}
     >
-      <UploadCloud className={cx("text-primary", compact ? "h-6 w-6" : "h-10 w-10")} aria-hidden />
+      <span className={cx("flex items-center justify-center rounded-2xl bg-primary-soft text-primary", compact ? "h-10 w-10" : "h-14 w-14")}>
+        <UploadCloud className={compact ? "h-5 w-5" : "h-7 w-7"} aria-hidden />
+      </span>
       <p className="text-sm font-medium text-ink">
         Drag and drop {multiple ? "files" : "a file"} here, or{" "}
-        <button type="button" onClick={() => input.current?.click()} className="font-semibold text-primary underline underline-offset-2">
+        <button type="button" onClick={() => input.current?.click()} className="font-semibold text-primary underline decoration-primary/40 underline-offset-4 hover:decoration-primary">
           {label}
         </button>
       </p>

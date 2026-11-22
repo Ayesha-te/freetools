@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowRight } from "lucide-react";
 import { categories, categoryMap, categoryHref, toolsInCategory, toolHref, type CategorySlug } from "@/lib/tools/registry";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import ToolCard from "@/components/ToolCard";
@@ -27,55 +28,90 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   if (!c) notFound();
   const list = toolsInCategory(slug as CategorySlug);
   const others = categories.filter((x) => x.slug !== slug);
+  const url = absUrl(categoryHref(slug));
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-      <Breadcrumbs items={[{ name: c.name, href: categoryHref(slug) }]} />
-      <header className="mt-5 flex items-start gap-4">
-        <span className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary sm:flex">
-          <ToolIcon name={c.icon} className="h-6 w-6" />
-        </span>
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight text-ink">{c.name}</h1>
-          <p className="mt-2 max-w-3xl text-ink-2">{c.intro[0]}</p>
+    <div className={`tone-${c.slug}`}>
+      <section className="relative overflow-hidden border-b border-border">
+        <div className="bg-grid pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent_90%)]" aria-hidden />
+        <div className="relative mx-auto max-w-7xl px-4 pb-12 pt-6 sm:px-6 sm:pt-8">
+          <Breadcrumbs items={[{ name: c.name, href: categoryHref(slug) }]} />
+          <header className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-center">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-tone-soft text-tone">
+              <ToolIcon name={c.icon} className="h-7 w-7" />
+            </span>
+            <div className="min-w-0">
+              <p className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-tone">{list.length} free tools</p>
+              <h1 className="mt-1 text-4xl font-extrabold text-ink sm:text-5xl">{c.name}</h1>
+            </div>
+          </header>
+          <p className="mt-5 max-w-3xl text-lg leading-relaxed text-ink-2">{c.intro[0]}</p>
         </div>
-      </header>
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{list.map((t) => <ToolCard key={t.slug} tool={t} />)}</div>
+      </section>
 
-      <AdSlot placement="content" />
-
-      <section className="prose-content mt-14 max-w-3xl">
-        <h2>About our {c.name.toLowerCase()}</h2>
-        {c.intro.slice(1).map((p, i) => <p key={i}>{p}</p>)}
-        <h2>Which tool should I use?</h2>
-        <ul>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {list.map((t) => (
-            <li key={t.slug}>
-              <Link href={toolHref(t.slug)}>{t.name}</Link> — {t.summary}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="mt-14" aria-labelledby="other-cats">
-        <h2 id="other-cats" className="text-xl font-bold text-ink">Other categories</h2>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {others.map((o) => (
-            <Link key={o.slug} href={categoryHref(o.slug)} className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2 text-sm text-ink-2 hover:border-primary/40 hover:text-primary">
-              <ToolIcon name={o.icon} className="h-4 w-4" /> {o.name}
-            </Link>
+            <ToolCard key={t.slug} tool={t} />
           ))}
         </div>
-      </section>
+
+        <AdSlot placement="content" />
+
+        <div className="mt-20 grid gap-12 lg:grid-cols-[minmax(0,1fr)_20rem]">
+          <section className="prose-content min-w-0 max-w-3xl">
+            <h2>About our {c.name.toLowerCase()}</h2>
+            {c.intro.slice(1).map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
+            <h2>Which tool should I use?</h2>
+            <ul>
+              {list.map((t) => (
+                <li key={t.slug}>
+                  <Link href={toolHref(t.slug)}>{t.name}</Link>: {t.summary}
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <aside aria-labelledby="other-cats">
+            <div className="rounded-2xl border border-border bg-surface p-5 lg:sticky lg:top-24">
+              <h2 id="other-cats" className="font-sans text-sm font-semibold uppercase tracking-[0.14em] text-muted">
+                Other categories
+              </h2>
+              <ul className="mt-3 space-y-1">
+                {others.map((o) => (
+                  <li key={o.slug} className={`tone-${o.slug}`}>
+                    <Link href={categoryHref(o.slug)} className="group flex items-center gap-3 rounded-xl px-2 py-2 text-sm text-ink-2 transition-colors hover:bg-surface-2 hover:text-ink">
+                      <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-tone-soft text-tone">
+                        <ToolIcon name={o.icon} className="h-4 w-4" />
+                      </span>
+                      <span className="flex-1">{o.name}</span>
+                      <ArrowRight className="h-4 w-4 text-muted opacity-0 transition-opacity group-hover:opacity-100" aria-hidden />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
 
       <JsonLd
         data={{
           "@context": "https://schema.org",
           "@type": "CollectionPage",
+          "@id": `${url}#page`,
           name: c.name,
           description: c.metaDescription,
-          url: absUrl(categoryHref(slug)),
-          hasPart: list.map((t) => ({ "@type": "WebApplication", name: t.name, url: absUrl(toolHref(t.slug)) })),
+          url,
+          inLanguage: "en",
+          isPartOf: { "@id": absUrl("/") + "#website" },
+          mainEntity: {
+            "@type": "ItemList",
+            numberOfItems: list.length,
+            itemListElement: list.map((t, i) => ({ "@type": "ListItem", position: i + 1, name: t.name, url: absUrl(toolHref(t.slug)) })),
+          },
         }}
       />
     </div>

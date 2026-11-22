@@ -40,7 +40,7 @@ export function absUrl(path = "/") {
   return `${site.url}${p.endsWith("/") ? p : `${p}/`}`.replace(/\/\/$/, "/");
 }
 
-export const ogImages = [{ url: "/og.png", width: 1200, height: 630, alt: "ToolSprint – Free Online Tools. Fast, Simple, Secure." }];
+export const ogImages = [{ url: "/og.png", width: 1200, height: 630, alt: "ToolSprint – free online tools for files and figures: images, PDFs, calculators, developer and SEO tools" }];
 
 /**
  * Builds consistent page metadata: title, description, canonical URL, Open Graph and Twitter/X card.

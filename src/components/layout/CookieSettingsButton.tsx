@@ -10,7 +10,7 @@ export default function CookieSettingsButton() {
     <li>
       <button
         type="button"
-        className="text-muted hover:text-primary"
+        className="text-ink-2 transition-colors hover:text-primary"
         onClick={() => {
           try {
             localStorage.removeItem(CONSENT_KEY);
