@@ -23,6 +23,8 @@ export const site = {
   apiUrl: (process.env.NEXT_PUBLIC_API_URL || "https://free.stride-events.net").replace(/\/$/, ""),
   /** GA4 Measurement ID. Env vars override; falls back to the ToolSprint property ID. */
   gaId: resolveMeasurementId(process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID, process.env.NEXT_PUBLIC_GA_ID, "G-HX5YM8P22D"),
+  /** Google Tag Manager container. Loads on every page with Consent Mode defaults set to "denied". */
+  gtmId: (process.env.NEXT_PUBLIC_GTM_ID || "GTM-N4WFM2ZX").trim(),
   gscVerification: process.env.NEXT_PUBLIC_GSC_VERIFICATION || "",
   lastUpdated: "2026-11-22",
 };

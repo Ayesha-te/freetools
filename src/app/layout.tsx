@@ -39,12 +39,27 @@ export const viewport: Viewport = {
   ],
 };
 
+// Google tag (Tag Manager container) with Consent Mode v2: everything starts "denied"; the cookie
+// banner sends a consent "update" to "granted" only after the visitor clicks Accept.
+const gtmScript = site.gtmId
+  ? `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=window.gtag||gtag;` +
+    `gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});` +
+    `try{if(localStorage.getItem('fth-consent')==='granted')gtag('consent','update',{analytics_storage:'granted'})}catch(e){}` +
+    `gtag('js',new Date());`
+  : "";
+
 const themeScript = `try{var t=localStorage.getItem('fth-theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark')}catch(e){}`;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${geist.variable} ${geistMono.variable} ${bricolage.variable}`} suppressHydrationWarning>
       <head>
+        {site.gtmId && (
+          <>
+            <script dangerouslySetInnerHTML={{ __html: gtmScript }} />
+            <script async src={`https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(site.gtmId)}`} />
+          </>
+        )}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="flex min-h-screen flex-col antialiased">

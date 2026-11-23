@@ -67,6 +67,8 @@ export function initAnalytics(id: string) {
     ad_user_data: "denied",
     ad_personalization: "denied",
   });
+  // The Tag Manager snippet in <head> already set a "denied" default; this update grants analytics for it too.
+  window.gtag("consent", "update", { analytics_storage: "granted" });
   window.gtag("js", new Date());
   window.gtag("config", id, {
     allow_google_signals: false,
