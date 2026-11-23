@@ -1,3 +1,5 @@
+import { resolveMeasurementId } from "@/lib/analytics";
+
 const DEFAULT_SITE_URL = "https://toolsprint.xyz";
 
 /**
@@ -19,7 +21,8 @@ export const site = {
   url: resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL),
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "",
   apiUrl: (process.env.NEXT_PUBLIC_API_URL || "https://free.stride-events.net").replace(/\/$/, ""),
-  gaId: process.env.NEXT_PUBLIC_GA_ID || "",
+  /** GA4 Measurement ID. NEXT_PUBLIC_GA_ID is still accepted as a legacy fallback. */
+  gaId: resolveMeasurementId(process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID, process.env.NEXT_PUBLIC_GA_ID),
   gscVerification: process.env.NEXT_PUBLIC_GSC_VERIFICATION || "",
   lastUpdated: "2026-11-22",
 };

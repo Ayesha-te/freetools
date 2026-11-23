@@ -35,7 +35,7 @@ export default function Privacy() {
       <h2>4. Analytics</h2>
       {analytics ? (
         <p>
-          With your consent, we use Google Analytics 4 to understand aggregate usage, such as which tools are popular and whether tools complete successfully. We send only event names and the tool's identifier — never file contents, file names, text you enter or results. IP anonymisation is requested. Google's use of this data is described in{" "}
+          With your consent, we use Google Analytics 4 to understand aggregate usage, such as which tools are popular and whether tools complete successfully. We send only the page path (without query strings), event names and the tool’s identifier — never file contents, file names, text you enter or results. Google Analytics 4 does not log or store IP addresses, and we disable Google signals and ad personalisation for analytics data. Google's use of this data is described in{" "}
           <a href="https://policies.google.com/technologies/partner-sites" rel="noopener noreferrer" target="_blank">How Google uses information from sites that use its services</a>.
         </p>
       ) : (

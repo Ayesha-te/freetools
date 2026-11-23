@@ -27,11 +27,17 @@ export default function TimestampTool({ slug }: ToolProps) {
   const [unit, setUnit] = useState<"auto" | "s" | "ms">("auto");
   const [dateStr, setDateStr] = useState("");
   const [zone, setZone] = useState<"local" | "utc">("local");
+  // The visitor's time zone is only known in the browser. Reading it during render made the
+  // pre-rendered HTML (built in UTC) differ from the client, causing a hydration mismatch (#418).
+  const [tz, setTz] = useState("");
 
   useEffect(() => {
     setNow(Date.now());
     setTs(String(Math.floor(Date.now() / 1000)));
     setDateStr(toLocalInput(new Date()));
+    try {
+      setTz(Intl.DateTimeFormat().resolvedOptions().timeZone || "");
+    } catch {}
     const t = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(t);
   }, []);
@@ -57,7 +63,6 @@ export default function TimestampTool({ slug }: ToolProps) {
     return { ms };
   }, [dateStr, zone]);
 
-  const tz = typeof Intl !== "undefined" ? Intl.DateTimeFormat().resolvedOptions().timeZone : "local";
 
   return (
     <div className="space-y-4">
@@ -82,7 +87,7 @@ export default function TimestampTool({ slug }: ToolProps) {
             <div aria-live="polite">
               <p className="mb-1 text-xs text-muted">Interpreted as {fromTs.u === "s" ? "seconds" : "milliseconds"}.</p>
               <Row label="UTC (ISO 8601)" value={fromTs.d.toISOString()} tool={slug} />
-              <Row label={`Local (${tz})`} value={fromTs.d.toLocaleString(undefined, { dateStyle: "full", timeStyle: "long" })} tool={slug} />
+              <Row label={tz ? `Local (${tz})` : "Local"} value={fromTs.d.toLocaleString(undefined, { dateStyle: "full", timeStyle: "long" })} tool={slug} />
               <Row label="RFC 2822 / HTTP" value={fromTs.d.toUTCString()} tool={slug} />
               <Row label="Relative" value={relativeTime(fromTs.d, now ?? Date.now())} tool={slug} />
             </div>
@@ -94,7 +99,7 @@ export default function TimestampTool({ slug }: ToolProps) {
           <div className="grid gap-4 sm:grid-cols-[2fr_1fr]">
             <Input label="Date and time" type="datetime-local" step={1} value={dateStr} onChange={(e) => setDateStr(e.target.value)} />
             <Select label="Interpret as" value={zone} onChange={(e) => setZone(e.target.value as typeof zone)}>
-              <option value="local">Local time ({tz})</option>
+              <option value="local">{tz ? `Local time (${tz})` : "Local time"}</option>
               <option value="utc">UTC</option>
             </Select>
           </div>

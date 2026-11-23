@@ -4,7 +4,7 @@ import Script from "next/script";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ads, site } from "@/lib/site";
-import { CONSENT_KEY, CONSENT_RESET_EVENT, getConsent } from "@/lib/analytics";
+import { CONSENT_KEY, CONSENT_RESET_EVENT, getConsent, initAnalytics, disableAnalytics } from "@/lib/analytics";
 
 /**
  * Loads Google Analytics and AdSense only when configured via environment variables.
@@ -24,6 +24,14 @@ export default function Scripts() {
     return () => window.removeEventListener(CONSENT_RESET_EVENT, reopen);
   }, []);
 
+  // Apply the analytics consent state: initialise GA4 only after "Accept"; stop it on reject/withdrawal.
+  const analyticsOn = !!site.gaId && consent === "granted";
+  useEffect(() => {
+    if (!site.gaId || consent === "unknown") return;
+    if (consent === "granted") initAnalytics(site.gaId);
+    else disableAnalytics(site.gaId);
+  }, [consent]);
+
   function choose(v: "granted" | "denied") {
     try {
       localStorage.setItem(CONSENT_KEY, v);
@@ -35,12 +43,11 @@ export default function Scripts() {
 
   return (
     <>
-      {site.gaId && consent === "granted" && (
+      {analyticsOn && (
         <>
-          <Script src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(site.gaId)}`} strategy="afterInteractive" />
-          <Script id="ga-init" strategy="afterInteractive">
-            {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config',${JSON.stringify(site.gaId)},{anonymize_ip:true});`}
-          </Script>
+          {/* Official Google tag (gtag.js). The command queue is created by initAnalytics().
+              Page views, including client-side navigations, come from GA4 Enhanced Measurement. */}
+          <Script id="ga-gtag" src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(site.gaId)}`} strategy="afterInteractive" />
         </>
       )}
       {ads.enabled && (consent === "granted" || consent === "denied") && (
@@ -79,3 +86,4 @@ export default function Scripts() {
     </>
   );
 }
+
