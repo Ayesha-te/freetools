@@ -18,7 +18,8 @@ interface Result {
 
 export default function ImageCompressor({ slug }: ToolProps) {
   const targetMode = slug !== "image-compressor";
-  const defaultTarget = slug === "compress-image-to-50kb" ? "50" : "100";
+  // compress-image-to-20kb -> "20", compress-image-to-200kb -> "200", etc.
+  const defaultTarget = /^compress-image-to-(\d+)kb$/.exec(slug)?.[1] ?? "100";
   const { image, error, setError, pick, reset, loading } = useSingleImage();
   const [quality, setQuality] = useState(75);
   const [format, setFormat] = useState<"auto" | OutFormat>("auto");

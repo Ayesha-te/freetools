@@ -9,9 +9,9 @@ const renderer = readFileSync(path.resolve(__dirname, "../src/components/tools/T
 const words = (s: string) => s.split(/\s+/).filter(Boolean).length;
 
 describe("tool registry & content integrity", () => {
-  it("has exactly 47 tools with unique slugs", () => {
-    expect(tools).toHaveLength(47);
-    expect(new Set(tools.map((t) => t.slug)).size).toBe(47);
+  it("has exactly 50 tools with unique slugs", () => {
+    expect(tools).toHaveLength(50);
+    expect(new Set(tools.map((t) => t.slug)).size).toBe(50);
   });
   it("every tool belongs to a real category and every category has tools", () => {
     const cats = new Set(categories.map((c) => c.slug));

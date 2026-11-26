@@ -43,6 +43,45 @@ export const audience: Record<string, { audience: string[]; features: string[] }
       "Original file is never modified — you download a separate copy.",
     ],
   },
+  "compress-image-to-20kb": {
+    audience: [
+      "Applicants uploading a scanned signature to exam, job or bank portals that cap it at 10–20 KB.",
+      "Students submitting small thumbnail photos to admission or scholarship forms.",
+      "Anyone whose upload field rejects an image as too large at a 20 KB limit.",
+    ],
+    features: [
+      "Targets 20 KB by default and searches quality levels automatically to land under it.",
+      "Scales the image down in small steps only when quality alone cannot reach the target.",
+      "Optional maximum width/height for forms that also specify pixel dimensions.",
+      "Reports the final size, the quality used and any dimension change.",
+    ],
+  },
+  "compress-image-to-30kb": {
+    audience: [
+      "Job and exam applicants whose photo field accepts files of 30 KB or less.",
+      "Users of government, visa or recruitment portals with strict photo size rules.",
+      "Anyone who needs a little more detail than a 20 KB file allows.",
+    ],
+    features: [
+      "30 KB default target, adjustable anywhere from 5 KB to 20,000 KB.",
+      "Keeps the highest quality that still fits, so faces and text stay as clear as possible.",
+      "JPG output for maximum compatibility, or WebP where the form accepts it.",
+      "Never claims success unless the file is really at or under your target.",
+    ],
+  },
+  "compress-image-to-200kb": {
+    audience: [
+      "People uploading ID card, certificate or document scans to portals with a 200 KB limit.",
+      "Sellers and bloggers who want sharp photos that still load quickly.",
+      "Anyone sending phone photos through forms or email systems that reject larger files.",
+    ],
+    features: [
+      "200 KB default target: enough for most photos to keep full resolution.",
+      "Automatic quality search finds the sharpest result under the limit.",
+      "Works on JPG, PNG, WebP, GIF and BMP files up to 40 MB.",
+      "Your original file is never changed; you download a separate copy.",
+    ],
+  },
   "image-resizer": {
     audience: [
       "Social media managers who need images at platform-friendly dimensions.",

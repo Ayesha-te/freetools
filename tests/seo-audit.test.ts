@@ -5,8 +5,8 @@ import { content } from "@/content";
 const words = (s: string) => s.split(/\s+/).filter(Boolean).length;
 
 describe("SEO content audit for every tool", () => {
-  it("has 47 tools with unique titles and meta descriptions", () => {
-    expect(tools.length).toBe(47);
+  it("has 50 tools with unique titles and meta descriptions", () => {
+    expect(tools.length).toBe(50);
     expect(new Set(tools.map((t) => t.title)).size).toBe(tools.length);
     expect(new Set(tools.map((t) => t.metaDescription)).size).toBe(tools.length);
     expect(new Set(tools.map((t) => t.name)).size).toBe(tools.length);

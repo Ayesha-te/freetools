@@ -42,7 +42,7 @@ export const imageContent: Record<string, BaseToolContent> = {
       { q: "Does compression remove location data from photos?", a: "Yes. Images are redrawn on a canvas and saved fresh, so EXIF metadata including GPS coordinates is not included in the downloaded file." },
       { q: "Is there a limit on how many images I can compress?", a: "No daily limit. Each image is processed on your device, so the only constraint is your browser's memory." },
     ],
-    related: ["compress-image-to-100kb", "compress-image-to-50kb", "image-resizer", "png-to-jpg"],
+    related: ["compress-image-to-20kb", "compress-image-to-50kb", "compress-image-to-100kb", "compress-image-to-200kb"],
   },
 
   "compress-image-to-50kb": {
@@ -82,7 +82,7 @@ export const imageContent: Record<string, BaseToolContent> = {
       { q: "Can I compress to exactly 50 KB?", a: "Image encoders produce sizes in jumps, so an exact byte count is not achievable. The tool guarantees the file is at or below your target when it reports success." },
       { q: "My form says “between 20 KB and 50 KB”. Will this work?", a: "Yes — the tool aims for the highest quality under the limit, so results are usually close to the upper bound. Check the reported size against the minimum." },
     ],
-    related: ["compress-image-to-100kb", "image-cropper", "image-resizer", "image-compressor"],
+    related: ["compress-image-to-20kb", "compress-image-to-30kb", "compress-image-to-100kb", "image-cropper"],
   },
 
   "compress-image-to-100kb": {
@@ -117,7 +117,125 @@ export const imageContent: Record<string, BaseToolContent> = {
       { q: "Why do I get a slightly different size in another browser?", a: "Each browser ships its own image encoder. All of them stay under your target when the tool reports success." },
       { q: "Can I go back to the original quality?", a: "Compression is lossy, so detail removed cannot be restored from the compressed copy. Your original file on your device is not changed, so keep it." },
     ],
-    related: ["compress-image-to-50kb", "image-compressor", "image-resizer", "image-to-pdf"],
+    related: ["compress-image-to-50kb", "compress-image-to-200kb", "image-compressor", "image-resizer"],
+  },
+
+  "compress-image-to-20kb": {
+    intro: [
+      "Compress Image to 20KB is built for the smallest common upload limit: signature scans, thumbnail photos and other small images on exam, recruitment and banking forms. It tries quality levels automatically and keeps the best one that fits under 20 KB.",
+      "20 KB is a tight budget for a photograph, so the tool will often reduce the pixel size as well. Each step is about 15% smaller, and the result always shows the real final size and dimensions, so you know exactly what you are uploading.",
+    ],
+    why: [
+      "Signature fields are where most applicants get stuck: the scan from a phone camera is 1–3 MB and the form wants 20 KB. Doing that by hand in an editor takes many attempts; here it takes one click.",
+      "Signatures and ID photos are personal documents. This tool compresses them inside your browser, so they are never sent to a server.",
+    ],
+    steps: [
+      "Scan or photograph your signature on plain white paper, or pick the photo you need to upload.",
+      "Crop away empty margins first with the Image Cropper. Less area means more detail fits into 20 KB.",
+      "Open the file here. The target is already set to 20 KB; change it if your form allows a different size, such as 10 KB or 15 KB.",
+      "Click “Compress image” and check the reported size, quality and dimensions.",
+      "Download the result and upload it to your form.",
+    ],
+    examples: [
+      { title: "Signature for an online exam form", body: "A phone photo of a signature on white paper, cropped tightly to the ink, usually fits in 8–18 KB while staying crisp, because large white areas compress very efficiently." },
+      { title: "Small passport-style thumbnail", body: "A portrait photo normally needs to be around 300–450 pixels wide to fit 20 KB with acceptable facial detail. The tool reduces the size automatically and tells you the final dimensions." },
+    ],
+    formats: [
+      "Input: JPG, PNG, WebP, GIF and BMP up to 40 MB.",
+      "Output: JPG by default, or WebP if your form accepts it.",
+      "Target range: 5 KB to 20,000 KB, so the same page works for 10 KB and 15 KB limits too.",
+    ],
+    limitations: [
+      "Detailed colour photos usually have to be made smaller in pixels to reach 20 KB; very large target dimensions and 20 KB are not compatible.",
+      "Shadows and grey paper make signature scans compress poorly. Use bright, even light and white paper for the cleanest result.",
+      "The tool treats 1 KB as 1,024 bytes. If a portal counts 1,000 bytes and rejects the file by a tiny margin, set the target to 19 KB.",
+    ],
+    privacy: localImage,
+    faq: [
+      { q: "Can a photo really be compressed to 20 KB?", a: "Yes, but usually not at full camera resolution. At 20 KB the tool keeps quality as high as it can and reduces the pixel size only as much as needed. The final size and dimensions are shown before you download." },
+      { q: "How do I make my signature look sharp at 20 KB?", a: "Crop tightly around the signature, use dark ink on white paper and take the photo in good light. Clean, high-contrast images compress far better than shaded ones." },
+      { q: "My form asks for a signature between 10 KB and 20 KB. What target should I use?", a: "Leave the target at 20 KB. The tool aims for the highest quality under the limit, so results usually land close to the upper bound. Check that the reported size is above 10 KB." },
+      { q: "Is the file uploaded anywhere?", a: "No. Compression runs in your browser using its built-in image engine, and the file never leaves your device." },
+    ],
+    related: ["compress-image-to-30kb", "compress-image-to-50kb", "image-cropper", "image-resizer"],
+  },
+
+  "compress-image-to-30kb": {
+    intro: [
+      "Compress Image to 30KB gets a photo or signature under a 30 KB upload limit, a common rule on recruitment, admission and government application portals. It searches for the highest quality that fits and only shrinks the image if it has to.",
+      "30 KB gives noticeably more room than 20 KB, so passport-style photos keep clearer faces and signatures stay smooth. The result always shows the exact final size, the quality used and any change in dimensions.",
+    ],
+    why: [
+      "Portals rarely tell you how to meet their limit; they just reject the file. This tool does the trial and error for you and stops at the best result under 30 KB.",
+      "Application photos and signatures are personal. Everything happens on your own device, so nothing is uploaded to us or anyone else.",
+    ],
+    steps: [
+      "Choose the photo or signature you need to upload.",
+      "If the form specifies dimensions (for example 200×230 pixels), crop or resize to that first.",
+      "Keep the 30 KB target, or change it to match the exact limit on your form.",
+      "Click “Compress image”. The tool tests quality levels, and smaller sizes if needed.",
+      "Check the size shown in the result, then download and upload the file.",
+    ],
+    examples: [
+      { title: "Recruitment form photograph", body: "A 2 MB phone portrait cropped to a head-and-shoulders frame typically fits 30 KB at roughly 450–600 pixels wide with clear facial detail." },
+      { title: "Admission form with photo and signature", body: "Compress the photo here at 30 KB, then compress the signature separately with the 20 KB tool if the form gives it a smaller limit." },
+    ],
+    formats: [
+      "Input: JPG, PNG, WebP, GIF and BMP up to 40 MB.",
+      "Output: JPG by default, or WebP.",
+      "Target range: 5 KB to 20,000 KB.",
+    ],
+    limitations: [
+      "Busy backgrounds and noisy low-light photos use more bytes, so they may be scaled down more. A plain background gives the best result.",
+      "This tool controls file size only. If the form also requires an exact pixel size or background colour, use the Cropper and Resizer first.",
+      "Different browsers use different JPEG encoders, so the final size can vary slightly between Chrome, Firefox and Safari. It always stays under the target when success is reported.",
+    ],
+    privacy: localImage,
+    faq: [
+      { q: "Will my photo still be clear at 30 KB?", a: "For a cropped head-and-shoulders photo, yes. The tool keeps the highest quality that fits and only reduces dimensions when quality alone cannot reach 30 KB." },
+      { q: "Why is my result 28 KB instead of exactly 30 KB?", a: "Image encoders produce sizes in steps, so an exact byte count is not possible. The tool picks the best result at or below your limit." },
+      { q: "Can I use this for a signature too?", a: "Yes. Signatures on white paper compress very well and usually end up far below 30 KB. If your form needs 20 KB or less, use the 20 KB tool instead." },
+    ],
+    related: ["compress-image-to-20kb", "compress-image-to-50kb", "image-cropper", "image-compressor"],
+  },
+
+  "compress-image-to-200kb": {
+    intro: [
+      "Compress Image to 200KB brings large phone photos and document scans under a 200 KB limit without making them blurry. With this budget most images keep their full resolution, so text on certificates and ID cards stays readable.",
+      "The tool searches for the highest quality that fits under 200 KB and only scales the image down if quality alone is not enough. It reports the final size, quality and dimensions, and says clearly if the target could not be reached.",
+    ],
+    why: [
+      "Many portals that ask for document scans, such as ID cards, certificates and proof of address, cap uploads at 200 KB. A raw phone scan is often 2–5 MB, so it needs compressing before the form will accept it.",
+      "Document scans often contain personal details. Because the tool runs in your browser, the scan is never uploaded to a server.",
+    ],
+    steps: [
+      "Photograph or scan the document flat, in good light, and crop away the background.",
+      "Open the image here. The target is already 200 KB.",
+      "Choose JPG for the widest compatibility, or WebP if the destination supports it.",
+      "Click “Compress image” and zoom into the preview to check that small text is still readable.",
+      "Download the compressed copy and upload it.",
+    ],
+    examples: [
+      { title: "ID card or certificate scan", body: "A 4 MB phone photo of an A4 certificate usually compresses to 150–200 KB at around 1600–2000 pixels wide, with body text still easy to read." },
+      { title: "Photos for a listing or blog post", body: "A 3 MB product or travel photo typically fits 200 KB at 1600 pixels or more at high quality, which looks sharp on screen and loads quickly." },
+    ],
+    formats: [
+      "Input: JPG, PNG, WebP, GIF and BMP up to 40 MB.",
+      "Output: JPG or WebP.",
+      "Target range: 5 KB to 20,000 KB.",
+    ],
+    limitations: [
+      "Multi-page documents need one image per page. To send several pages as one file, use Image to PDF after compressing.",
+      "Transparency is lost when saving as JPG; transparent areas become white.",
+      "Very small text photographed from far away may become hard to read at 200 KB. Take the photo closer, or crop to the part that matters.",
+    ],
+    privacy: localImage,
+    faq: [
+      { q: "Will the image lose quality at 200 KB?", a: "Usually very little. 200 KB is enough for most photos to keep their full size at high quality, and the tool always picks the best quality that fits." },
+      { q: "How do I compress a document scan without making the text blurry?", a: "Crop to the document's edges, take the photo in even light, and keep the JPG output. Then zoom into the preview to check the smallest text before downloading." },
+      { q: "Can I compress several images to 200 KB at once?", a: "This tool handles one image at a time so you can check each result. Repeat for each file; it only takes a few seconds per image." },
+    ],
+    related: ["compress-image-to-100kb", "image-to-pdf", "image-compressor", "image-resizer"],
   },
 
   "image-resizer": {

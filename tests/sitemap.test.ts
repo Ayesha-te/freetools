@@ -9,8 +9,8 @@ const urls = sitemap().map((e) => e.url);
 const paths = urls.map((u) => u.replace(/^https:\/\/[^/]+/, ""));
 
 describe("sitemap.xml", () => {
-  it("lists 61 unique URLs on the canonical root domain", () => {
-    expect(urls.length).toBe(61);
+  it("lists 64 unique URLs on the canonical root domain", () => {
+    expect(urls.length).toBe(64);
     expect(new Set(urls).size).toBe(urls.length);
     for (const u of urls) expect(u).toMatch(/^https:\/\/toolsprint\.xyz\/([a-z0-9-]+\/)*$/);
   });
@@ -26,9 +26,9 @@ describe("sitemap.xml", () => {
     expect(paths.some((p) => p.startsWith("/category/"))).toBe(false);
   });
 
-  it("includes all 47 tool pages", () => {
+  it("includes all 50 tool pages", () => {
     const t = paths.filter((p) => p.startsWith("/tools/") && p !== "/tools/");
-    expect(t.length).toBe(47);
+    expect(t.length).toBe(50);
     expect(t.sort()).toEqual(tools.map((x) => `/tools/${x.slug}/`).sort());
   });
 
