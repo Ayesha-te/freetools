@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import InfoPage from "@/components/InfoPage";
+import JsonLd from "@/components/JsonLd";
 import ContactForm from "@/components/ContactForm";
-import { site, pageMeta } from "@/lib/site";
+import { site, pageMeta, absUrl } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
   title: "Contact Us – Report a Bug or Suggest a Tool",
@@ -38,6 +39,17 @@ export default function Contact() {
         <li>Your browser and device (for example “Chrome on Android”).</li>
       </ul>
       <p>Please do not send us the private files or text you were processing. Describe the problem, or share a non-sensitive sample instead.</p>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          name: "Contact ToolSprint",
+          url: absUrl("/contact/"),
+          inLanguage: "en",
+          isPartOf: { "@id": absUrl("/") + "#website" },
+          about: { "@id": absUrl("/") + "#organization" },
+        }}
+      />
     </InfoPage>
   );
 }

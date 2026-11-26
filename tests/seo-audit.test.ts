@@ -11,13 +11,15 @@ describe("SEO content audit for every tool", () => {
     expect(new Set(tools.map((t) => t.metaDescription)).size).toBe(tools.length);
     expect(new Set(tools.map((t) => t.name)).size).toBe(tools.length);
     expect(new Set(categories.map((c) => c.title)).size).toBe(categories.length);
+    for (const c of categories) expect(c.title.length, c.slug).toBeLessThanOrEqual(49);
   });
 
   for (const t of tools) {
     it(`${t.slug}: complete, original content`, () => {
       const c = content[t.slug];
       expect(c, "content exists").toBeTruthy();
-      expect(t.title.length, "title length").toBeLessThanOrEqual(70);
+      // ≤ 49 chars so the full "<title> | ToolSprint" stays within ~62 and is not cut off in results
+      expect(t.title.length, "title length").toBeLessThanOrEqual(49);
       expect(t.metaDescription.length, "meta description length").toBeGreaterThanOrEqual(70);
       expect(t.metaDescription.length, "meta description length").toBeLessThanOrEqual(170);
       expect(c.intro.length).toBeGreaterThan(0);

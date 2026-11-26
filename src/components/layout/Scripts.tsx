@@ -63,7 +63,7 @@ export default function Scripts() {
         </>
       )}
       {consent === null && (
-        <div role="dialog" aria-label="Cookie preferences" className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-2xl rounded-2xl border border-border bg-surface p-4 shadow-pop sm:inset-x-6 sm:p-5">
+        <div role="dialog" aria-label="Cookie preferences" className="fixed inset-x-3 bottom-3 z-50 rounded-2xl border border-border bg-surface p-4 shadow-pop sm:inset-x-auto sm:bottom-5 sm:left-5 sm:max-w-sm">
           <p className="text-sm text-ink-2">
             We use cookies for {site.gaId ? "anonymous usage statistics" : ""}
             {site.gaId && ads.enabled ? " and " : ""}

@@ -12,7 +12,7 @@ const bricolage = Bricolage_Grotesque({ subsets: ["latin"], display: "swap", var
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: `${site.name} – Free Online Tools for Images, PDFs, Students & Developers`, template: `%s | ${site.name}` },
+  title: { default: `Free Online Tools for Images, PDFs & Calculators | ${site.name}`, template: `%s | ${site.name}` },
   description: site.description,
   applicationName: site.name,
   category: "technology",

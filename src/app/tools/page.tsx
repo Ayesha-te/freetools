@@ -7,7 +7,7 @@ import JsonLd from "@/components/JsonLd";
 import { tools, toolHref, categories } from "@/lib/tools/registry";
 
 export const metadata: Metadata = pageMeta({
-  title: "All Free Online Tools – Image, PDF, Calculators, Developer & SEO",
+  title: "All Free Online Tools – Image, PDF & Calculators",
   description: `Browse all ${tools.length} free ToolSprint tools by category: image compression, PDF editing, GPA and business calculators, developer utilities and text/SEO tools.`,
   path: "/tools/",
 });

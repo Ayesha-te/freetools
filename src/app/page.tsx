@@ -12,7 +12,7 @@ import JsonLd from "@/components/JsonLd";
 import FaqList from "@/components/FaqList";
 
 export const metadata: Metadata = pageMeta({
-  title: `${site.name} – Free Online Tools for Images, PDFs, Students & Developers`,
+  title: `Free Online Tools for Images, PDFs & Calculators | ${site.name}`,
   description: site.description,
   path: "/",
   absolute: true,
@@ -49,7 +49,7 @@ export default function Home() {
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-border">
         <div className="bg-grid pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" aria-hidden />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 pb-16 pt-12 sm:px-6 sm:pb-20 sm:pt-16 lg:grid-cols-12 lg:pt-20">
+        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 pb-14 pt-10 sm:px-6 sm:pb-16 sm:pt-14 lg:grid-cols-12 lg:pt-16">
           <div className="lg:col-span-7">
             <p className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-ink-2 shadow-card">
               <span className="relative flex h-2 w-2" aria-hidden>
@@ -58,7 +58,7 @@ export default function Home() {
               </span>
               {tools.length} free tools · no sign-up · no uploads
             </p>
-            <h1 className="mt-6 text-[2.6rem] font-extrabold leading-[1.02] text-ink sm:text-6xl lg:text-[4.25rem]">
+            <h1 className="mt-6 text-[2.5rem] font-extrabold leading-[1.04] text-ink sm:text-[3.4rem] lg:text-[3.6rem] xl:text-[4rem]">
               Free online tools for{" "}
               <span className="relative whitespace-nowrap text-primary">
                 files & figures

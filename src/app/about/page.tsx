@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { pageMeta } from "@/lib/site";
+import { pageMeta, absUrl } from "@/lib/site";
 import Link from "next/link";
 import InfoPage from "@/components/InfoPage";
+import JsonLd from "@/components/JsonLd";
 import { categories, categoryHref, tools } from "@/lib/tools/registry";
 
 export const metadata: Metadata = pageMeta({
@@ -47,6 +48,17 @@ export default function About() {
       <p>
         Found a bug, a wrong result or have an idea for a tool? Please <Link href="/contact/">contact us</Link> — feedback directly shapes what we fix and build next.
       </p>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          name: "About ToolSprint",
+          url: absUrl("/about/"),
+          inLanguage: "en",
+          isPartOf: { "@id": absUrl("/") + "#website" },
+          about: { "@id": absUrl("/") + "#organization" },
+        }}
+      />
     </InfoPage>
   );
 }
