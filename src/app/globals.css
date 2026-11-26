@@ -159,6 +159,9 @@ body {
   line-height: 1;
 }
 
+/* A saved cookie choice (set by the inline head script) hides the server-rendered banner before first paint. */
+html[data-consent] .consent-banner { display: none; }
+
 details > summary { list-style: none; }
 details > summary::-webkit-details-marker { display: none; }
 

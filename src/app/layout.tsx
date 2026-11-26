@@ -48,7 +48,9 @@ const gtmScript = site.gtmId
     `gtag('js',new Date());`
   : "";
 
-const themeScript = `try{var t=localStorage.getItem('fth-theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark')}catch(e){}`;
+// Runs before first paint: applies the saved theme, and marks a saved cookie choice so the
+// server-rendered consent banner is hidden for returning visitors without a flash.
+const themeScript = `try{var d=document.documentElement,t=localStorage.getItem('fth-theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))d.classList.add('dark');var c=localStorage.getItem('fth-consent');if(c==='granted'||c==='denied')d.setAttribute('data-consent',c)}catch(e){}`;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (

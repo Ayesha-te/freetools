@@ -19,7 +19,10 @@ export default function Scripts() {
 
   useEffect(() => {
     setConsent(getConsent());
-    const reopen = () => setConsent(null);
+    const reopen = () => {
+      document.documentElement.removeAttribute("data-consent");
+      setConsent(null);
+    };
     window.addEventListener(CONSENT_RESET_EVENT, reopen);
     return () => window.removeEventListener(CONSENT_RESET_EVENT, reopen);
   }, []);
@@ -62,8 +65,11 @@ export default function Scripts() {
           />
         </>
       )}
-      {consent === null && (
-        <div role="dialog" aria-label="Cookie preferences" className="fixed inset-x-3 bottom-3 z-50 rounded-2xl border border-border bg-surface p-4 shadow-pop sm:inset-x-auto sm:bottom-5 sm:left-5 sm:max-w-sm">
+      {/* Rendered for "unknown" too, so the banner is in the static HTML and paints with the page
+          (as a late client-only paint it became the page's LCP element). Returning visitors never
+          see it: the inline head script sets data-consent and CSS hides .consent-banner. */}
+      {(consent === null || consent === "unknown") && (
+        <div role="dialog" aria-label="Cookie preferences" className="consent-banner fixed inset-x-3 bottom-3 z-50 rounded-2xl border border-border bg-surface p-4 shadow-pop sm:inset-x-auto sm:bottom-5 sm:left-5 sm:max-w-sm">
           <p className="text-sm text-ink-2">
             We use cookies for {site.gaId ? "anonymous usage statistics" : ""}
             {site.gaId && ads.enabled ? " and " : ""}
